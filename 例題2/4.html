@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var theYear = 2012;
+        var theMonth = 4;
+        var theDay = 25;
+
+        var mdays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        var mdays_of_leap_year = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        console.log(gdays(theYear, theMonth, theDay));
+
+        function gdays(y, m, d) {
+            var s;
+            var i;
+
+            // 問題[2] の計算と問題[3] の計算の結果の和が s にもとまるようにする
+
+            return s;
+        }
+
+        function leapYear(y) {
+            if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        
+        var untilDay = new Date(theYear,theMonth-1,theDay,0,0,0,0);
+        var sinceDay = new Date(1582,9,14,0,0,0,0);
+        console.log('問題4 ' + Math.floor((untilDay - sinceDay)/1000/60/60/24));
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

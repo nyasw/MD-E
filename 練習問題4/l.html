@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>カレンダー</title>
+
+</head>
+
+<body>
+    <p><input type="number" id="year">年<input type="number" id="month">月</p>
+    <p><input type="button" id="prev" value="前の月" onclick="prev1()"><input type="button" id="next" value="次の月"
+            onclick="next1()"></p>
+    <p><input type="button" id="button" value="表示" onclick="click1()"></p>
+    <table width="140" border="1">
+        <tbody>
+            <tr>
+                <td>日</td>
+                <td>月</td>
+                <td>火</td>
+                <td>水</td>
+                <td>木</td>
+                <td>金</td>
+                <td>土</td>
+            </tr>
+            <tr>
+                <td id="f0">&nbsp;</td>
+                <td id="f1">&nbsp;</td>
+                <td id="f2">&nbsp;</td>
+                <td id="f3">&nbsp;</td>
+                <td id="f4">&nbsp;</td>
+                <td id="f5">&nbsp;</td>
+                <td id="f6">&nbsp;</td>
+            </tr>
+            <tr>
+                <td id="f7">&nbsp;</td>
+                <td id="f8">&nbsp;</td>
+                <td id="f9">&nbsp;</td>
+                <td id="f10">&nbsp;</td>
+                <td id="f11">&nbsp;</td>
+                <td id="f12">&nbsp;</td>
+                <td id="f13">&nbsp;</td>
+            </tr>
+            <tr>
+                <td id="f14">&nbsp;</td>
+                <td id="f15">&nbsp;</td>
+                <td id="f16">&nbsp;</td>
+                <td id="f17">&nbsp;</td>
+                <td id="f18">&nbsp;</td>
+                <td id="f19">&nbsp;</td>
+                <td id="f20">&nbsp;</td>
+            </tr>
+            <tr>
+                <td id="f21">&nbsp;</td>
+                <td id="f22">&nbsp;</td>
+                <td id="f23">&nbsp;</td>
+                <td id="f24">&nbsp;</td>
+                <td id="f25">&nbsp;</td>
+                <td id="f26">&nbsp;</td>
+                <td id="f27">&nbsp;</td>
+            </tr>
+            <tr>
+                <td id="f28">&nbsp;</td>
+                <td id="f29">&nbsp;</td>
+                <td id="f30">&nbsp;</td>
+                <td id="f31">&nbsp;</td>
+                <td id="f32">&nbsp;</td>
+                <td id="f33">&nbsp;</td>
+                <td id="f34">&nbsp;</td>
+            </tr>
+            <tr>
+                <td id="f35">&nbsp;</td>
+                <td id="f36">&nbsp;</td>
+                <td id="f37">&nbsp;</td>
+                <td id="f38">&nbsp;</td>
+                <td id="f39">&nbsp;</td>
+                <td id="f40">&nbsp;</td>
+                <td id="f41">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        var mdays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        var mdays_of_leap_year = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        var theYear = 2018;
+        var theMonth = 5;
+        var youbi = 0;
+
+        // var dObj = new Date(theYear, theMonth-1, 1);
+        // var youbi = dObj.getDay();
+
+        window.onload = function () {
+            var today = new Date();
+            document.getElementById('year').value = today.getFullYear();
+            document.getElementById('month').value = today.getMonth() + 1;
+            displayCalendar(today.getFullYear(), today.getMonth() + 1);
+        }
+
+        function click1() {
+            var theYear = document.getElementById('year').value;
+            var theMonth = document.getElementById('month').value;
+            displayCalendar(theYear, theMonth);
+        }
+
+        function prev1() {
+            var theYear = document.getElementById('year').value;
+            var theMonth = document.getElementById('month').value - 1;
+            if (theMonth < 1) {
+                theYear--;
+                theMonth = 12;
+            }
+            document.getElementById('year').value = theYear;
+            document.getElementById('month').value = theMonth;
+            displayCalendar(theYear, theMonth);
+        }
+
+        function next1() {
+            var theYear = document.getElementById('year').value;
+            var theMonth = document.getElementById('month').value - 1 + 2;
+            if (theMonth > 12) {
+                theYear++;
+                theMonth = 1;
+            }
+            document.getElementById('year').value = theYear;
+            document.getElementById('month').value = theMonth;
+            displayCalendar(theYear, theMonth);
+        }
+
+        function displayCalendar(theYear, theMonth) {
+
+            var b = document.getElementsByTagName('tr');
+
+            b[5].style.display = "table-row";
+            b[6].style.display = "table-row";
+
+            if (leapYear(theYear) !== true) {
+                var DaysOfMonth = mdays[theMonth - 1];
+            } else {
+                var DaysOfMonth = mdays_of_leap_year[theMonth - 1];
+            }
+
+            var dObj = new Date(theYear, theMonth - 1, 1);
+            var youbi = dObj.getDay();
+
+            for (i = 0; i < 42; i++) {
+                var id = "f" + i;
+                document.getElementById(id).innerHTML = "&nbsp;";
+            }
+
+            for (i = 0; i < DaysOfMonth; i++) {
+
+                var j = i + youbi;
+                var id = "f" + j;
+
+                document.getElementById(id).innerHTML = i + 1;
+            }
+            console.log(DaysOfMonth, youbi);
+
+            if (DaysOfMonth + youbi < 36) {
+                removeRows();
+            }
+            if (DaysOfMonth + youbi < 29) {
+                removeRows();
+                removeRows28();
+            }
+        }
+
+
+        function removeRows() {
+            var b = document.getElementsByTagName('tr');
+            b[6].style.display = "none";
+            console.log('remove it');
+        }
+
+        function removeRows28() {
+            var b = document.getElementsByTagName('tr');
+            b[5].style.display = "none";
+            console.log('remove it');
+        }
+
+
+        function leapYear(y) {
+            if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>

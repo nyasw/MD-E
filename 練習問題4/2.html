@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        window.onload = function () {
+            var canvas = document.getElementById("mycanvas");
+            var ctx = canvas.getContext("2d");
+            for (var i = 0; i < 401; i+=10) {
+
+                ctx.beginPath();
+
+                ctx.moveTo(0 , i);
+                ctx.lineTo(400 , i);
+
+                ctx.stroke();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="mycanvas" width="401" height="401"></canvas>
+</body>
+
+</html>

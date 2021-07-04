@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script>
+    var canvas, ctx;
+    var firstX, firstY, r;
+    window.onload = function () {
+      canvas = document.getElementById("mycanvas");
+      ctx = canvas.getContext("2d");
+
+      canvas.onmousedown = function (e) {
+        document.addEventListener('mousemove', onMouseMove)
+      }
+      var onMouseMove = function (e) {
+        var rect = e.target.getBoundingClientRect();
+        secondX = firstX;
+        secondY = firstY;
+        firstX = e.clientX - Math.floor(rect.left);
+        firstY = e.clientY - Math.floor(rect.top);
+        r = Math.sqrt((firstX - secondX) * (firstX - secondX) + (firstY - secondY) * (firstY - secondY))/2;
+        makeCircle();
+      }
+
+      window.onmouseup = function (e) {
+        document.removeEventListener("mousemove", onMouseMove);
+      }
+
+
+
+
+      const makeCircle = function () {
+        ctx.beginPath();
+        ctx.arc(firstX, firstY, r, 0 * Math.PI / 180, 360 * Math.PI / 180, true);
+        ctx.fill();
+        ctx.stroke();
+      };
+    };
+  </script>
+</head>
+
+<body>
+  <canvas id="mycanvas" width="640" height="400"></canvas>
+</body>
+
+</html>

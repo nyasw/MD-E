@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>カレンダー</title>
+    <script>
+        var body;
+        var table;
+        var tbody;
+
+        window.onload = function() {
+            var i;
+            var j;
+            var tr;
+            var td;
+            var retsu = 3;
+            var gyou = 2;
+
+            body = (document.getElementsByTagName("body"))[0];
+
+            table = document.createElement("table");
+            table.setAttribute("border", "1");
+            body.appendChild(table);
+
+            tbody = document.createElement("tbody");
+            table.appendChild(tbody);
+
+            for(let k=0; k<gyou; k++ ){
+                tr = document.createElement("tr");
+                tbody.appendChild(tr);
+            
+            for(let l=0; l<retsu; l++){
+                    td = document.createElement('td');
+                    tr.appendChild(td);
+                }
+            }
+
+            var a = document.getElementsByTagName('td');
+            for(let m=0; m<a.length;m++){
+            a[m].innerHTML = 'A';
+            }
+            
+
+            console.log(body);
+            document.getElementById("button").onclick = removeAllRows;
+        };
+
+        function removeAllRows() {
+          var b = document.getElementsByTagName('tbody');
+          b[0].innerHTML = '';
+        }
+    </script>
+</head>
+
+<body>
+  <p><input type="button" id="button" value="全行削除"></p>
+</body>
+
+</html>

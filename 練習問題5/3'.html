@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script>
+    var canvas, ctx;
+    var firstX = 0, firstY = 0, secondX, secondY;
+    window.onload = function () {
+      canvas = document.getElementById("mycanvas");
+      ctx = canvas.getContext("2d");
+
+      canvas.onmousedown = function (e) {
+        var rect = e.target.getBoundingClientRect();
+        secondX = e.clientX - Math.floor(rect.left);
+        secondY = e.clientY - Math.floor(rect.top);
+        drawLine();
+        firstX = secondX;
+        firstY = secondY;
+      }
+
+      const drawLine = function () {
+
+        ctx.beginPath();
+
+        ctx.moveTo(firstX, firstY);
+        ctx.lineTo(secondX, secondY);
+
+        ctx.stroke();
+      }
+    };
+  </script>
+</head>
+
+<body>
+  <canvas id="mycanvas" width="640" height="400"></canvas>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script>
+    window.onload = function () {
+      var canvas = document.getElementById("mycanvas");
+      var ctx = canvas.getContext("2d");
+      var button = document.getElementById("button");
+      var pushes = 0;
+      var makeCircle = function () {
+        ctx.beginPath();
+        ctx.arc(pushes * 20, pushes * 20, 40, 0 * Math.PI / 180, 360 * Math.PI / 180, true);
+        ctx.stroke();
+        pushes = pushes + 1;
+      };
+
+      button.onclick = function () {
+        makeCircle();
+      };
+    };
+  </script>
+</head>
+
+<body>
+  <canvas id="mycanvas" width="640" height="400"></canvas>
+
+  <p><input type="button" value="click" id="button"></p>
+</body>
+
+</html>

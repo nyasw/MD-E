@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script>
+    window.onload = function () {
+      var canvas = document.getElementById("mycanvas");
+      var ctx = canvas.getContext("2d");
+      var x, y = 0;
+
+      canvas.onmousemove = function (e) {
+        var rect = e.target.getBoundingClientRect();
+        x = e.clientX - Math.floor(rect.left);
+        y = e.clientY - Math.floor(rect.top);
+        makeCircle(x, y);
+      }
+
+
+      const makeCircle = function (x, y) {
+        ctx.beginPath();
+        ctx.arc(x, y, 40, 0 * Math.PI / 180, 360 * Math.PI / 180, true);
+        ctx.strokeStyle = "rgb(" + (~~(256 * Math.random())) + ", " + (~~(256 * Math.random())) + ", " + (~~(256 *Math.random())) + ")";
+        ctx.stroke();
+        console.log(x, y);
+      };
+
+
+    };
+  </script>
+</head>
+
+<body>
+  <canvas id="mycanvas" width="640" height="400"></canvas>
+</body>
+
+</html>

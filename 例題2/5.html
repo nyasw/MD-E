@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var theYear = 2012;
+        var theMonth = 4;
+        var theDay = 25;
+
+        var mdays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        var mdays_of_leap_year = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        var day_of_week = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"];
+
+        //グレゴリオ暦がスタートする 1582年10月15日が、金曜日と定められていることを基準に、theYear年theMonth月theDay日が何曜日なのかを計算する。
+        //（ヒント：問題[4] で作った「グレゴリオ暦がスタートしてから、その年月日が何日目なのか」の計算結果( gdays(theYear,theMonth,theDay) )を７で割った「余り」に注目。）
+        //例)
+        //  gdays(1582,10,15) == 1 → "金曜日" (== day_of_week[5])
+        //  gdays(1582,10,16) == 2 → "土曜日" (== day_of_week[6])
+        //  gdays(1582,10,17) == 3 → "日曜日" (== day_of_week[0])
+        //  gdays(1582,10,18) == 4 → "月曜日" (== day_of_week[1])
+        //  gdays(1582,10,19) == 5 → "火曜日" (== day_of_week[2])
+        //  gdays(1582,10,20) == 6 → "水曜日" (== day_of_week[3])
+        //  gdays(1582,10,21) == 7 → "木曜日" (== day_of_week[4])
+        //  gdays(1582,10,22) == 8 → "金曜日" (== day_of_week[5])
+        //  gdays(1582,10,22) == 9 → "土曜日" (== day_of_week[6])
+        //  ...
+        //  gdays(1583,1,1) == 79 → "土曜日" (== day_of_week[6])
+        //  gdays(1583,1,2) == 80 → "日曜日" (== day_of_week[0])
+        //  gdays(1583,1,3) == 81 → "月曜日" (== day_of_week[1])
+        //  gdays(1583,1,4) == 82 → "火曜日" (== day_of_week[2])
+        //  gdays(1583,1,5) == 83 → "水曜日" (== day_of_week[3])
+        //  gdays(1583,1,6) == 84 → "木曜日" (== day_of_week[4])
+        //  gdays(1583,1,7) == 85 → "金曜日" (== day_of_week[5])
+        //  gdays(1583,1,8) == 86 → "土曜日" (== day_of_week[6])
+        //  gdays(1583,1,9) == 87 → "日曜日" (== day_of_week[0])
+        //  ...
+
+        function gdays(y, m, d) {
+            var s;
+            var i;
+
+            s = 78;
+            for (i = 1583; i <= y - 1; i++) {
+                if (leapYear(i)) {
+                    s += 366;
+                } else {
+                    s += 365;
+                }
+            }
+
+            if (leapYear(y)) {
+                for (i = 0; i <= m - 2; i++) {
+                    s += mdays_of_leap_year[i];
+                }
+            } else {
+                for (i = 0; i <= m - 2; i++) {
+                    s += mdays[i];
+                }
+            }
+
+            s += d;
+
+            return s;
+        }
+
+
+        function leapYear(y) {
+            if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        var Day = new Date(theYear,theMonth-1,theDay,0,0,0,0);
+        console.log(day_of_week[Day%7])
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

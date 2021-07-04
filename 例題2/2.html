@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var theYear = 2020; //平年
+        var theMonth = 4;
+        var theDay = 25;
+
+        var mdays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        var mdays_of_leap_year = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        var s;
+        var i;
+
+        if (leapYear(theYear)) {
+            s = 0;
+            for (i = 1; i <= (theMonth - 1); i++) {
+                s += mdays_of_leap_year[i - 1];
+            }
+            s += theDay;
+        } else {
+            s = 0;
+            for (i = 1; i <= (theMonth - 1); i++) {
+                s += mdays[i - 1];
+            }
+            s += theDay;
+        }
+        
+        const isLeapYear = year =>  ( (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0 );
+ 
+
+        console.log(s);
+
+        //1. 上記の計算を for 文で表現すると...
+
+
+        //2. 閏年の場合の処理にも、対応させるには...
+        //例えば、
+        //var theYear:int = 2012; //平年
+        //var theMonth:int = 4;
+        //var theDay:int = 25; の場合 :
+
+        //s = 0;
+        //s += mdays_of_leap_year[0];
+        //s += mdays_of_leap_year[1];
+        //s += mdays_of_leap_year[2];
+        //
+        //s += theDay;
+        //
+        //console.log(s);
+
+        function leapYear(y) {
+            if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        var untilDay = new Date(theYear,theMonth-1,theDay,0,0,0,0);
+        var sinceDay = new Date(theYear,0,0,0,0,0,0);
+        console.log('問題2 ' + (untilDay - sinceDay)/1000/60/60/24);
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

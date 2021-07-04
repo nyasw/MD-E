@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script>
+    window.onload = function () {
+      var canvas = document.getElementById("mycanvas");
+      var ctx = canvas.getContext("2d");
+      var move = 0;
+
+      canvas.onmousemove = function () {
+        move += 1;
+        makeCircle(move);
+      }
+
+
+      const makeCircle = function (move) {
+        ctx.beginPath();
+        ctx.arc(move * 20, move * 20, 40, 0 * Math.PI / 180, 360 * Math.PI / 180, true);
+        ctx.stroke();
+      };
+
+
+    };
+  </script>
+</head>
+
+<body>
+  <canvas id="mycanvas" width="640" height="400"></canvas>
+</body>
+
+</html>

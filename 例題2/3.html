@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var theYear = 1590;
+
+        var s;
+        var i;
+
+        s = 78; // 1582.10.15 〜 1582.12.31 の日数
+        s += 365; // 1583
+        s += 366; // 1584 : 閏年!!
+        s += 365; // 1585
+        s += 365; // 1586
+        s += 365; // 1587
+        s += 366; // 1588 : 閏年!!
+        s += 365; // 1589
+
+        // 1. 上記の計算を for 文で表現すると...
+        // 2. その for 文の表現を任意の theYear に対して働くように改良すると...
+
+        console.log(s);
+
+        function leapYear(y) {
+            if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        
+        var untilDay = new Date(theYear,0,0,0,0,0,0);
+        var sinceDay = new Date(1582,9,14,0,0,0,0);
+        console.log('問題3 ' + (untilDay - sinceDay)/1000/60/60/24);
+        
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script>
+    window.onload = function () {
+      var canvas = document.getElementById("mycanvas");
+      var ctx = canvas.getContext("2d");
+
+
+      const makeCircle = function () {
+        ctx.beginPath();
+        ctx.arc(x, y, 40, 0 * Math.PI / 180, 360 * Math.PI / 180, true);
+        ctx.stroke();
+      };
+
+      canvas.onclick = function (e) {
+        x = e.offsetX;
+        y = e.offsetY;
+        makeCircle();
+      }
+    };
+  </script>
+</head>
+
+<body>
+  <canvas id="mycanvas" width="640" height="400"></canvas>
+</body>
+
+</html>
